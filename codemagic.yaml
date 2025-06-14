@@ -1,0 +1,50 @@
+# This is a starter workflow for building a Capacitor iOS app on Codemagic
+
+workflows:
+  capacitor-ios-app:
+    name: Capacitor iOS App
+    max_build_duration: 120 # Sets a 2-hour time limit for the build
+    instance_type: mac_mini_m1 # Specifies the type of cloud Mac to use
+    environment:
+      node: 18 # Specifies the Node.js version to use
+      groups:
+        - app-store-credentials # A group for your Apple Developer credentials (you'll set this up in the Codemagic UI)
+      vars:
+        APP_ID: "com.isailfaster.app" # Your Bundle ID
+        XCODE_WORKSPACE: "ios/App/App.xcworkspace" # Path to your Xcode workspace
+        XCODE_SCHEME: "App" # The name of your Xcode scheme
+    scripts:
+      - name: Install npm dependencies
+        script: |
+          npm install --legacy-peer-deps
+      - name: Build web app
+        script: |
+          npm run build
+      - name: Sync web assets with Capacitor
+        script: |
+          npx cap sync ios
+      - name: Set up code signing
+        script: |
+          app-store-connect fetch-signing-files "$APP_ID" --type IOS_APP_STORE --create
+      - name: Set up keychain
+        script: |
+          keychain init
+          keychain add-certificates
+      - name: Use automatic code signing
+        script: |
+          xcode-project use-profiles
+      - name
+        : Build IPA for App Store
+        script: |
+          xcode-project build-ipa --workspace "$XCODE_WORKSPACE" --scheme "$XCODE_SCHEME"
+    artifacts:
+      - build/ios/ipa/*.ipa # Path to find the final .ipa file after the build
+    publishing:
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_API_KEY # This is a secure variable you'll set up in the Codemagic UI
+        
+        # The following section is for automatically submitting to TestFlight.
+        # You can uncomment it once you're ready.
+        # submit_to_testflight: true
+        # beta_groups: # Add the names of your TestFlight beta groups here
+        #   - "App Testers"
