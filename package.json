@@ -1,5 +1,5 @@
 {
-  "name": "project",
+  "name": "vite-react-typescript-starter",
   "version": "1.0.0",
   "description": "",
   "main": "expo-router/entry",
@@ -7,17 +7,26 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
-  "overrides": {
-    "@types/react": "^18.3.5"
+    "web": "expo start --web",
+    "build": "vite build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@capacitor/cli": "^7.3.0",
+    "@capacitor/core": "^7.3.0",
+    "@capacitor/ios": "^7.3.0",
     "@expo/vector-icons": "^14.1.0",
     "expo": "^53.0.11",
-    "react": "^19.1.0",
-    "react-native": "^0.80.0"
+    "lucide-react": "^0.515.0",
+    "react": "19.0.0",
+    "react-dom": "^19.1.0",
+    "react-native": "0.79.3",
+    "react-router-dom": "^7.6.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.10",
+    "@vitejs/plugin-react": "^4.5.2",
+    "vite": "^6.3.5"
   }
 }
