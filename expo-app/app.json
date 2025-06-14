@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "iSailFaster Sailing App",
+    "slug": "isailfaster-sailing-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.isailfaster.app",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app uses location to provide GPS speed and heading data for sailing.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app uses location to provide GPS speed and heading data for sailing.",
+        "NSSpeechRecognitionUsageDescription": "This app uses speech synthesis for voice announcements during race countdowns.",
+        "UIBackgroundModes": ["location"]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "package": "com.isailfaster.app",
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-location",
+      "expo-speech",
+      "expo-av",
+      "expo-keep-awake",
+      "expo-screen-orientation"
+    ]
+  }
+}
