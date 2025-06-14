@@ -4,6 +4,12 @@
       "eas": {
         "projectId": "68c26b50-5391-4757-9b17-7ffc792977c9"
       }
+    },
+    "ios": {
+      "bundleIdentifier": "com.isailfaster.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     }
   }
 }
