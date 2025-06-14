@@ -15,28 +15,21 @@ workflows:
         XCODE_SCHEME: "App" # The name of your Xcode scheme
     scripts:
       - name: Install npm dependencies
-        script: |
-          npm install --legacy-peer-deps
+        script: npm install --legacy-peer-deps
       - name: Build web app
-        script: |
-          npm run build
+        script: npm run build
       - name: Sync web assets with Capacitor
-        script: |
-          npx cap sync ios
+        script: npx cap sync ios
       - name: Set up code signing
-        script: |
-          app-store-connect fetch-signing-files "$APP_ID" --type IOS_APP_STORE --create
-      - name: Set up keychain
+        script: app-store-connect fetch-signing-files "$APP_ID" --type IOS_APP_STORE --create
+      - name: Set up keychain and certificates
         script: |
           keychain init
           keychain add-certificates
       - name: Use automatic code signing
-        script: |
-          xcode-project use-profiles
-      - name
-        : Build IPA for App Store
-        script: |
-          xcode-project build-ipa --workspace "$XCODE_WORKSPACE" --scheme "$XCODE_SCHEME"
+        script: xcode-project use-profiles
+      - name: Build IPA for App Store
+        script: xcode-project build-ipa --workspace "$XCODE_WORKSPACE" --scheme "$XCODE_SCHEME"
     artifacts:
       - build/ios/ipa/*.ipa # Path to find the final .ipa file after the build
     publishing:
